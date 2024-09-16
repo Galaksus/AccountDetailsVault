@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheet.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+</head>
+
+<body>
+    <h1>Käyttäjätunnukset</h1>
+    <div id="Edit" class="edit-popup">
+        <span class="close-edit-popup" style="color: #333;"
+            onclick="closeDialog(document.getElementById('Edit'))">&#10006;</span>
+
+        <div class="modify-container">
+            <h2 class="border-below" >Modify:</h2>
+        </div>
+        <div class="modify-container">
+            <a href="javascript:void(0);" id="update-button" class="button" >Update card</a>
+            <a href="javascript:void(0);" id="delete-button" class="button" >Delete card</a>
+        </div>
+        <div class="modify-container">
+            <h2 class="border-below" style="margin-top: 15px;" >Copy to clipboard:</h2>
+        </div>
+        <div class="modify-container">
+            <a href="javascript:void(0);" id="copy-email"  class="button" onclick="copyTextToClipboard(this)">Email</a>
+            <a href="javascript:void(0);" id="copy-username" class="button"onclick="copyTextToClipboard(this)">Username</a>
+            <a href="javascript:void(0);" id="copy-password"  class="button"onclick="copyTextToClipboard(this)">Password</a>
+        </div>
+
+    </div>
+    <div class="plus-icon">+</div>
+
+    <!-- Dialog -->
+    <div id="add-new-dialog" class="add-new-dialog-class">
+        <div class="add-new-dialog-content">
+            <span class="close-info-popup" style="color: #333;"
+            onclick="closeDialog(document.getElementById('add-new-dialog'))">&#10006;</span>
+            <h3 class="border-below">Add new account</h3>
+
+            <label for="Category">Category:</label>
+            <input type="text" id="category"><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email"><br>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username"><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password"><br>
+
+
+            <a href="javascript:void(0);" id="submitBtn"  class="button">Submit</a>
+            <a href="javascript:void(0);" id="cancelBtn"  class="button">Cancel</a>
+        </div>
+    </div>
+
+    <script src="createElements.js"></script>
+
+</body>
+
+</html>

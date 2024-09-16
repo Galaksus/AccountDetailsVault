@@ -1,0 +1,193 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevents user from selecting text within the whole HTML document */
+body {
+  user-select: none;
+  background-color: #2e2e2e; /* Light gray background */
+}
+
+body h1 {
+  color: #ffffff;
+  text-align: center;
+}
+
+
+.outer-credentials-pane {
+  margin-left: 1%; /* Adjust as needed */
+  margin-right: 1%; /* Adjust as needed */
+  background-color: #f2f2f2; /* Light gray background */
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px; /* Add margin on top */
+}
+
+.inner-credentials-pane {
+  margin-left: 1%; /* Adjust as needed */
+  margin-right: 1%; /* Adjust as needed */
+  background-color: #dadada; /* Light gray background */
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px; /* Add margin on top */
+  display: flex;
+  justify-content: space-between;
+}
+
+.outer-credentials-pane h3 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px; /* Modify default top margin of h3 */
+  border-bottom: 1px solid #000;
+  align-items: center;
+}
+
+.info-icon {
+  width: 24px; /* Adjust the size of the icon */
+  height: 24px;
+  cursor: pointer;
+}
+
+.edit-credentials {
+  width: 20px; /* Adjust the size of the icon */
+  height: 20px;
+  cursor: pointer;
+}
+
+.info-popup, .edit-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%; /* Adjust width as needed */
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  max-height: 125%; /* Set maximum height as needed */
+  overflow-y: auto; /* Make the content scrollable if it exceeds the max height */
+  overflow-x: hidden;
+}
+
+.info-popup p, .edit-popup p{
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.info-popup h2, .edit-popup h2 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.close-info-popup, .close-edit-popup {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000000;
+  background-color: #b1b1b1;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+
+.button:active {
+  background-color: #1f6f9f;
+  transform: scale(0.95);
+}
+.modify-container {
+  display: flex;
+  justify-content: center;
+}
+
+.border-below {
+  border-bottom: 2px solid #000; /* Adjust the width, style, and color as needed */
+}
+
+
+.plus-icon {
+  position: fixed; /* Fixed position to keep it at the bottom of the viewport */
+  bottom: 20px; /* Distance from the bottom of the viewport */
+  left: 50%;
+  font-weight: bold;
+  transform: translateX(-50%);
+  font-size: 30px; /* Smaller font size */
+  z-index: 1000; /* High z-index to ensure it's on top */
+  background: #707070; /* Background color */
+  color: #fff; /* Text color */
+  padding: 6px; /* Reduced padding */
+  width: 45px; /* Reduced width */
+  height: 45px; /* Reduced height */
+  border-radius: 50%; /* Circular shape */
+  display: flex; /* Flexbox to center the text */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Optional, for a shadow effect */
+  cursor: pointer; /* Optional, to show it's clickable */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s; /* Smooth transition */
+}
+
+.plus-icon:active {
+    background-color: #363636;
+    transform: translateX(-50%) scale(0.9); /* Scale down the icon when clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
+/* Dialog styles */
+.add-new-dialog-class {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 2000;
+}
+
+.add-new-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+/* Default input styling */
+.add-new-dialog-class h3 {
+  font-weight: bold;
+  text-align: center;
+}
+/* Default input styling */
+.add-new-dialog-class input {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Styling when an input is focused (clicked) */
+.add-new-dialog-class input:focus {
+  border-color: #6086af; /* Blue border when focused */
+  outline: 2px solid #6086af; /* Blue outline */
+  box-shadow: none; /* Remove any additional shadows if you want a cleaner look */
+}
+
+.add-new-dialog-class button {
+  margin-right: 10px;
+  padding: 8px 12px;
+}

@@ -1,0 +1,4 @@
+CREATE TABLE categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category_name TEXT NOT NULL UNIQUE
+);
