@@ -4,17 +4,11 @@ let _username;
 let _email; 
 let _password; 
 
-const globalCategoryData = {};
-const globalCredentialData = {}; // TODO miten päästä käsiks?
-
 // Function to create and append outer elements
 function createOuterElements(data) {
   console.log(data);
 
   data = parseJsonData(data);
-
-  // Update global data
-  globalCategoryData[data.category_name] = data;
 
   // Create the div with class 'settings-pane'
   const settingsPane = document.createElement("div");
@@ -23,12 +17,12 @@ function createOuterElements(data) {
 
   // Create the h3 element
   const heading = document.createElement("h3");
-  heading.textContent = data.categoryId + ": " + data.category_name;
+  heading.textContent = /*data.categoryId + ": " +*/ data.category_name;
 
   // Append h3 to div
   settingsPane.appendChild(heading);
 
-  // Append the div to the body (or any other element)
+  // Append the div to the body 
   document.body.appendChild(settingsPane);
 }
 
@@ -37,9 +31,6 @@ function createInnerElements(data) {
   console.log(data);
 
   data = parseJsonData(data);
-
-  // Update global data
-  globalCredentialData[data.category_name] = data;
 
   // Ensure the parsed data and target div exists
   if (data && data.category_name) {
@@ -85,8 +76,20 @@ function createInnerElements(data) {
           editIcon.src = 'icons/new-black.svg';
           editIcon.alt = 'Edit';
           editIcon.onclick = function() {
-              showPopup('Edit', this);
-          };
+            // Find the closest parent div with the class 'outer-credentials-pane'
+            const outerElement = this.closest('.outer-credentials-pane');
+            
+            // Get the category_name from the outerElement's ID
+            if (outerElement) {
+              _category = outerElement.id;
+                console.log('Category Name:', _category);
+                
+                // Now call your showPopup function with the category name
+                showPopup('Edit', this, _category);
+            } else {
+                console.error('Outer element with class "outer-credentials-pane" not found.');
+            }
+        };
           div.appendChild(editIcon);
 
           // Append the created div to the target div
@@ -177,7 +180,8 @@ updateButton.addEventListener('click', () => {
 });
 
 deleteButton.addEventListener('click', () => {
-  let success = Android.deleteRow(parseInt(_id, 10), "k");
+
+  let success = Android.deleteRow(parseInt(_id, 10), _category);
   if (success) {
     Android.showToast("Row has beed deleted");
     // Clear all elements and reload UI
@@ -304,3 +308,31 @@ categoryInput.addEventListener('focus', hideErrorMessage);
 usernameInput.addEventListener('focus', hideErrorMessage);
 emailInput.addEventListener('focus', hideErrorMessage);
 passwordInput.addEventListener('focus', hideErrorMessage);
+
+
+
+
+function OKClickOnAreYouSurePrompt() {
+  /*
+   * Performs the delete operation if OK is cliced on the Are you sure propmpt
+   */
+  AreYouSureDialog.style.display = "none";
+  // Delete the row from database
+  window.Android.deleteRowFromDb(currentIndex);
+  refreshSelectElement(true);
+
+  // Send a toast to Android about it
+  window.Android.toastMessageFromJS("Route deleted successfully");
+}
+
+const AreYouSureDialog = document.getElementById("are-you-sure-dialog");
+
+
+
+
+deleteButton.addEventListener('click', function() {
+  /*
+  * Reveals the "are you sure" dialog
+  */
+    AreYouSureDialog.style.display = "block";
+});
