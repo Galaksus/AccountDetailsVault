@@ -30,6 +30,8 @@ public class JavaScriptInterface {
         int numOfCategories = DataAccessObject.getNumberOfRowsFromTable(CategoryTable.Entry.TABLE_NAME);
         int numOfCredentials = DataAccessObject.getNumberOfRowsFromTable(CredentialsTable.Entry.TABLE_NAME);
 
+        Log.d("omadebugggi", "numOfCategories: " + numOfCategories + " numOfCredentials: " +numOfCredentials);
+
         for (int categoryRow = 0; categoryRow < numOfCategories; categoryRow++) {
            String category = DataAccessObject.getCategoryByRowNumber(categoryRow);
            callJavaScriptFunction(("createOuterElements('"+category+"');"));
@@ -63,8 +65,27 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
-    public boolean updateRowById(int id, String categoryName, String email, String username, String password) {
-        return DataAccessObject.updateRowById(id, categoryName, email, username, password);
+    public boolean updateRowById(int id, String oldCategoryName, String categoryName, String email, String username, String password) {
+        // Check if category name exists in Categories table
+        boolean exists = DataAccessObject.checkIfGivenCategoryExists(categoryName, CategoryTable.Entry.TABLE_NAME, CategoryTable.Entry.NAME);
+        if (!exists) {
+            DataAccessObject.insertCategory(categoryName);
+        }
+
+
+        Boolean success = DataAccessObject.updateRowById(id, categoryName, email, username, password);
+
+        // Check if oldCategoryName exists in Credentials table
+        exists = DataAccessObject.checkIfGivenCategoryExists(oldCategoryName, CredentialsTable.Entry.TABLE_NAME, CredentialsTable.Entry.CATEGORY_NAME);
+        Log.d("omaddd", "exists: " + exists + " success: "+ success);
+        if (success && !exists) {
+            Log.d("omaddd", "trying to delete:  " + oldCategoryName);
+
+            success = DataAccessObject.deleteRowByCategory(oldCategoryName, CategoryTable.Entry.TABLE_NAME, CategoryTable.Entry.NAME);
+            Log.d("omaddd", "success ppävitett: " + success);
+        }
+
+        return success;
     }
     @JavascriptInterface
     public boolean deleteRow(int id, String category) {
@@ -76,7 +97,14 @@ public class JavaScriptInterface {
 
         return success;
     }
+    @JavascriptInterface
+    public String getCredentialRowByID(int id) {
+        Log.d("debugtagi", "käuys ja id: " + id);
+        String data = DataAccessObject.getCredentialRowByID(id);
+        Log.d("debugtagi", data);
 
+        return data;
+    }
 
     public static void callJavaScriptFunction(String javascriptCode) {
         // Post to main thread

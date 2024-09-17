@@ -113,7 +113,7 @@ public class DataAccessObject {
             // Check if a record is found
             if (cursor != null && cursor.moveToFirst()) {
                 // Extract data from the cursor
-                int credentialId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                int credentialId = cursor.getInt(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.ID));
                 String category_name = cursor.getString(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.CATEGORY_NAME));
                 String email = cursor.getString(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.EMAIL));
                 String username = cursor.getString(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.USERNAME));
@@ -132,6 +132,44 @@ public class DataAccessObject {
                 cursor.close();
             }
             db.close();
+        }
+
+        return jsonCredential;
+    }
+
+    public String getCredentialRowByID(int id) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String jsonCredential = "{}";
+        Cursor cursor = null;
+
+        try {
+            // Define the query
+            String query = "SELECT id, category_name, email, username, password FROM credentials WHERE id = ?";
+            // Execute the query
+            cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
+
+            // Check if we have results
+            if (cursor != null && cursor.moveToFirst()) {
+                // Retrieve the data
+                int credentialId = cursor.getInt(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.ID));
+                String categoryName = cursor.getString(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.CATEGORY_NAME));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.EMAIL));
+                String username = cursor.getString(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.USERNAME));
+                String password = cursor.getString(cursor.getColumnIndexOrThrow(CredentialsTable.Entry.PASSWORD));
+
+                // Construct JSON string manually
+                jsonCredential = String.format("{\"id\":%d,\"category_name\":\"%s\",\"email\":\"%s\",\"username\":\"%s\",\"password\":\"%s\"}",
+                        credentialId, escapeJson(categoryName), escapeJson(email), escapeJson(username), escapeJson(password));
+
+                Log.d(TAG, "jsonCredential: " + jsonCredential);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error retrieving credential row by ID", e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
 
         return jsonCredential;

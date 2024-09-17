@@ -5,38 +5,33 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Arkku</title>
 </head>
 
 <body>
     <h1>Käyttäjätunnukset</h1>
-    <div id="Edit" class="edit-popup">
-        <span class="close-edit-popup" style="color: #333;"
-            onclick="closeDialog(document.getElementById('Edit'))">&#10006;</span>
+    <div id="Edit" class="dialog-overlay">
+        <div class="dialog-box">
+            <span class="close-popup" onclick="closeDialog(document.getElementById('Edit'))">&#10006;</span>
 
-        <div class="modify-container">
-            <h2 class="border-below" >Modify:</h2>
-        </div>
-        <div class="modify-container">
-            <a href="javascript:void(0);" id="update-button" class="button" >Update card</a>
-            <a href="javascript:void(0);" id="delete-button" class="button" >Delete card</a>
-        </div>
-        <div class="modify-container">
-            <h2 class="border-below" style="margin-top: 15px;" >Copy to clipboard:</h2>
-        </div>
-        <div class="modify-container">
-            <a href="javascript:void(0);" id="copy-email"  class="button" onclick="copyTextToClipboard(this)">Email</a>
-            <a href="javascript:void(0);" id="copy-username" class="button"onclick="copyTextToClipboard(this)">Username</a>
-            <a href="javascript:void(0);" id="copy-password"  class="button"onclick="copyTextToClipboard(this)">Password</a>
-        </div>
+            <h2 class="border-below">Modify:</h2>
 
+            <a id="update-button" class="button">Update card</a>
+            <a id="delete-button" class="button">Delete card</a>
+
+            <h2 class="border-below" style="margin-top: 15px;">Copy to clipboard:</h2>
+
+            <a id="copy-email" class="button" onclick="copyTextToClipboard(this)">Email</a>
+            <a id="copy-username" class="button" onclick="copyTextToClipboard(this)">Username</a>
+            <a id="copy-password" class="button" onclick="copyTextToClipboard(this)">Password</a>
+        </div>
     </div>
     <div class="plus-icon">+</div>
 
-    <!-- Dialog -->
+    <!-- Add new Dialog -->
     <div id="add-new-dialog" class="add-new-dialog-class">
         <div class="add-new-dialog-content">
-            <span class="close-info-popup" style="color: #333;"
+            <span class="close-popup" style="color: #333;"
             onclick="closeDialog(document.getElementById('add-new-dialog'))">&#10006;</span>
             <h3 class="border-below">Add new account</h3>
 
@@ -53,31 +48,54 @@
             <input type="password" id="password"><br>
 
 
-            <a href="javascript:void(0);" id="submitBtn"  class="button">Submit</a>
-            <a href="javascript:void(0);" id="cancelBtn"  class="button">Cancel</a>
+            <a id="submitBtn"  class="button">Submit</a>
+            <a id="cancelBtn"  class="button">Cancel</a>
+        </div>
+    </div>
+
+    <!-- Update Dialog -->
+    <div id="update-dialog" class="add-new-dialog-class">
+        <div class="add-new-dialog-content">
+            <span class="close-popup" style="color: #333;"
+            onclick="closeUpdateDialog(document.getElementById('update-dialog'))">&#10006;</span>
+            <h3 class="border-below">Update credentials</h3>
+
+            <label for="Category">Category:</label>
+            <input type="text" id="u-category"><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="u-email"><br>
+
+            <label for="username">Username:</label>
+            <input type="text" id="u-username"><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="u-password"><br>
+
+
+            <a id="updateBtn"  class="button" onclick="UpdateClickedOnUpdatePrompt()">Update</a>
+            <a id="cancelBtn-2"  class="button">Cancel</a>
         </div>
     </div>
 
     <!-- The 'Are you sure' dialog container -->
-     <!--
-    <div id="are-you-sure-dialog" class="default-dialog" onclick="closeDialog(this);">
+    <div id="are-you-sure-dialog" class="default-dialog" onclick="closeAreYouSureDialog(this);">
         <div class="dialog-container" onclick="event.stopPropagation();">
             <div class="dialog-header-content">
                 Are you sure you want to delete?
-                <span class="close-dialog-button"
-                onclick="closeDialog(document.getElementById('are-you-sure-dialog'))">&#10006;</span>
             </div>
             <div class="dialog-content">
 
                 <div class="input-buttons-container-class" id="input-buttons-container">
                     <div class="name-buttons-class name-buttons-class-2">
-                        <button class="dialog-ok-cancel-buttons" onclick="closeDialog(document.getElementById('are-you-sure-dialog'))">Cancel</button>
+                        <button class="dialog-ok-cancel-buttons" onclick="closeAreYouSureDialog(document.getElementById('are-you-sure-dialog'))">Cancel</button>
                         <button class="dialog-ok-cancel-buttons" onclick="OKClickOnAreYouSurePrompt()">OK</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div> 
+    
 
     <script src="createElements.js"></script>
 

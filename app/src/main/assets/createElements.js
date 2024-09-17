@@ -3,7 +3,7 @@ let _category;
 let _username; 
 let _email; 
 let _password; 
-
+let _uOldCategoryName;
 // Function to create and append outer elements
 function createOuterElements(data) {
   console.log(data);
@@ -28,8 +28,6 @@ function createOuterElements(data) {
 
 
 function createInnerElements(data) {
-  console.log(data);
-
   data = parseJsonData(data);
 
   // Ensure the parsed data and target div exists
@@ -38,62 +36,86 @@ function createInnerElements(data) {
       const targetDiv = document.getElementById(data.category_name);
 
       if (targetDiv) {
-          // Create the parent div element for inner credentials pane
-          const div = document.createElement('div');
-          div.className = 'inner-credentials-pane';
+        // Create the parent div element for inner credentials pane
+        const div = document.createElement("div");
+        div.className = "inner-credentials-pane";
 
-          // Create and append the details-section div
-          const detailsSection = document.createElement('div');
-          detailsSection.className = 'details-section';
+        // Create and append the details-section div
+        const detailsSection = document.createElement("div");
+        detailsSection.className = "details-section";
 
-          // Create and append the Username label
-          const idLabel = document.createElement('p');
-          idLabel.innerHTML = `<strong>Id:</strong> ${data.id || 'N/A'}`;
-          detailsSection.appendChild(idLabel);
+        // Create and append the Username label
+        const idLabel = document.createElement("p");
+        idLabel.innerHTML = `<strong>Id:</strong> ${data.id || "N/A"}`;
+        detailsSection.appendChild(idLabel);
 
-          // Create and append the Email label
-          const emailLabel = document.createElement('p');
-          emailLabel.innerHTML = `<strong>Email:</strong> ${data.email || 'N/A'}`;
-          detailsSection.appendChild(emailLabel);
+        // Create and append the Email label
+        const emailLabel = document.createElement("p");
+        emailLabel.innerHTML = `<strong>Email:</strong> ${data.email || "N/A"}`;
+        detailsSection.appendChild(emailLabel);
 
-          // Create and append the Username label
-          const usernameLabel = document.createElement('p');
-          usernameLabel.innerHTML = `<strong>Username:</strong> ${data.username || 'N/A'}`;
-          detailsSection.appendChild(usernameLabel);
+        // Create and append the Username label
+        const usernameLabel = document.createElement("p");
+        usernameLabel.innerHTML = `<strong>Username:</strong> ${
+          data.username || "N/A"
+        }`;
+        detailsSection.appendChild(usernameLabel);
 
-          // Create and append the Password label
-          const passwordLabel = document.createElement('p');
-          passwordLabel.innerHTML = `<strong>Password:</strong> ${data.password || 'N/A'}`;
-          detailsSection.appendChild(passwordLabel);
+        // Create and append the Password label
+        const passwordLabel = document.createElement("p");
+        passwordLabel.innerHTML = `<strong>Password:</strong> ${
+          obfuscatePassword(data.password) || "N/A"
+        }`;
+        passwordLabel.style.cursor = "pointer"; // Change cursor to pointer to indicate it's clickable
+        passwordLabel.addEventListener("click", togglePasswordVisibility); // Add the click event listener
+        detailsSection.appendChild(passwordLabel);
 
-          // Append the details-section to the parent div
-          div.appendChild(detailsSection);
+        // Function to toggle the password visibility
+        function togglePasswordVisibility() {
+          const isObfuscated = passwordLabel.innerHTML.includes(
+            obfuscatePassword(data.password)
+          );
+          passwordLabel.innerHTML = isObfuscated
+            ? `<strong>Password:</strong> ${data.password || "N/A"}`
+            : `<strong>Password:</strong> ${
+                obfuscatePassword(data.password) || "N/A"
+              }`;
+        }
 
-          // Create and append the edit-credentials img
-          const editIcon = document.createElement('img');
-          editIcon.id = 'testi';
-          editIcon.className = 'edit-credentials';
-          editIcon.src = 'icons/new-black.svg';
-          editIcon.alt = 'Edit';
-          editIcon.onclick = function() {
-            // Find the closest parent div with the class 'outer-credentials-pane'
-            const outerElement = this.closest('.outer-credentials-pane');
-            
-            // Get the category_name from the outerElement's ID
-            if (outerElement) {
-              _category = outerElement.id;
-                console.log('Category Name:', _category);
-                
-                // Now call your showPopup function with the category name
-                showPopup('Edit', this, _category);
-            } else {
-                console.error('Outer element with class "outer-credentials-pane" not found.');
-            }
+        // Function to obfuscate the password for display
+        function obfuscatePassword(password) {
+          return "*".repeat(password.length);
+        }
+
+        // Append the details-section to the parent div
+        div.appendChild(detailsSection);
+
+        // Create and append the edit-credentials img
+        const editIcon = document.createElement("img");
+        editIcon.id = "testi";
+        editIcon.className = "edit-credentials";
+        editIcon.src = "icons/new-black.svg";
+        editIcon.alt = "Edit";
+        editIcon.onclick = function () {
+          // Find the closest parent div with the class 'outer-credentials-pane'
+          const outerElement = this.closest(".outer-credentials-pane");
+
+          // Get the category_name from the outerElement's ID
+          if (outerElement) {
+            _category = outerElement.id;
+
+            // Now call your showPopup function with the category name
+            showPopup("Edit", this, _category);
+          } else {
+            console.error(
+              'Outer element with class "outer-credentials-pane" not found.'
+            );
+          }
         };
-          div.appendChild(editIcon);
+        div.appendChild(editIcon);
 
-          // Append the created div to the target div
-          targetDiv.appendChild(div);
+        // Append the created div to the target div
+        targetDiv.appendChild(div);
       } else {
           console.error(`Div with ID ${data.category_name} not found.`);
       }
@@ -104,7 +126,6 @@ function createInnerElements(data) {
 
 
 function parseJsonData(jsonString) {
-    console.log("json stringi", jsonString);
     try {
       const data = JSON.parse(jsonString);
   
@@ -118,8 +139,6 @@ function parseJsonData(jsonString) {
 
 
   function showPopup(id, id2) {
-    console.log(`showPopup called with id: ${id} and id2:`, id2);
-    
     var popup = document.getElementById(id);
   
     if (popup.id == 'Edit') {
@@ -140,9 +159,6 @@ function parseJsonData(jsonString) {
           if (key == "Id") {
             _id = value;
           }
-          /*else if (key === "category") {
-            _category = value;
-          }*/
           else if (key === "Username") {
             _username = value;
           } else if (key === "Email") {
@@ -152,47 +168,96 @@ function parseJsonData(jsonString) {
           }
         }
       });
-
-      var outerPane = id2.closest(".inner-credentials-pane");
-
-      console.log("_id:", _id);
-      console.log("_username:", _username);
-      console.log("_email:", _email); 
-      console.log("_password:", _password); 
     }
     // Toggle popup visibility
-    popup.style.display = popup.style.display === "block" ? "none" : "block";
+    popup.style.display = popup.style.display === "flex" ? "none" : "flex";
   }
   
 
  const updateButton = document.getElementById('update-button'); 
  const deleteButton = document.getElementById('delete-button'); 
 
+function showUpdateDialog() {
+  // Read db to show correct data
+  let data = Android.getCredentialRowByID(parseInt(_id, 10));
+  data = parseJsonData(data);
 
+  // Clear the inputs
+  _uOldCategoryName = data.category_name;
+  uCategoryInput.value = data.category_name;
+  uUsernameInput.value = data.username;
+  uEmailInput.value = data.email;
+  uPasswordInput.value = data.password;
+
+
+  const dialog = document.getElementById('update-dialog');
+  dialog.style.display = "flex"
+
+}
+// Function to close the dialog
+function closeUpdateDialog(dialogElement) {
+  dialogElement.style.display = "none"
+}
 updateButton.addEventListener('click', () => {
-  let success = Android.updateRowById(_id);
+  showUpdateDialog();
+});
+// Function triggered when "OK" is clicked in the dialog
+function UpdateClickedOnUpdatePrompt() {
+  // Get data from the dialog
+  const category = uCategoryInput.value;
+  const username = uUsernameInput.value;
+  const email = uEmailInput.value;
+  const password = uPasswordInput.value;
+
+
+  let success = Android.updateRowById(parseInt(_id, 10), _uOldCategoryName, category, username, email, password);
   if (success) {
     Android.showToast("Row has beed updated");
-  }
-  else {
-    Android.showToast("Failed to update row");
-  }
-});
-
-deleteButton.addEventListener('click', () => {
-
-  let success = Android.deleteRow(parseInt(_id, 10), _category);
-  if (success) {
-    Android.showToast("Row has beed deleted");
-    // Clear all elements and reload UI
     document.body.innerHTML = '';
     window.location.reload();
   }
   else {
-    Android.showToast("Failed to delete row");
+    Android.showToast("Failed to update row");
   }
+
+  // Close the dialog after action
+  closeDialog(document.getElementById('update-dialog'));
+}
+
+
+// Function to show the "Are you sure" dialog
+function showAreYouSureDialog() {
+  const dialog = document.getElementById('are-you-sure-dialog');
+  dialog.classList.add('show'); // Make the dialog visible
+}
+
+// Event listener for delete button
+deleteButton.addEventListener('click', () => {
+  showAreYouSureDialog(); // Open the "Are you sure" dialog
 });
 
+// Function to close the dialog
+function closeAreYouSureDialog(dialogElement) {
+  dialogElement.classList.remove('show'); // Hide the dialog
+}
+
+
+// Function triggered when "OK" is clicked in the dialog
+function OKClickOnAreYouSurePrompt() {
+  let success = Android.deleteRow(parseInt(_id, 10), _category);
+  
+  if (success) {
+    Android.showToast("Row has been deleted");
+    // Clear all elements and reload UI
+    document.body.innerHTML = '';
+    window.location.reload();
+  } else {
+    Android.showToast("Failed to delete row");
+  }
+  
+  // Close the dialog after action
+  closeDialog(document.getElementById('are-you-sure-dialog'));
+}
 
 // Function to close the dialog
 function closeDialog(element) {
@@ -200,25 +265,24 @@ function closeDialog(element) {
 }
 
 function copyTextToClipboard(element) {
-  let text;
-  
+  let data = Android.getCredentialRowByID(parseInt(_id, 10))
+  data = parseJsonData(data);
+  let text = "";
+
   if (element.id == 'copy-username') {
-    console.log(_username);
-    text = _username;
+    text = data.username;
   }
   else if (element.id == 'copy-email') {
-    console.log(_email);
-    text = _email;
+    text = data.email;
 
   }
   else if (element.id == 'copy-password') {
-    console.log(_password);
-    text = _password;
+    text = data.password;
 
   }
 
   navigator.clipboard.writeText(text).then(() => {
-      console.log('Text copied to clipboard successfully!');
+      console.log('Text', text, 'copied to clipboard successfully!');
   }).catch(err => {
       console.error('Failed to copy text: ', err);
       console.error('Failed to copy text.');
@@ -229,13 +293,19 @@ function copyTextToClipboard(element) {
 // Get references to elements
 const plusIcon = document.querySelector('.plus-icon'); 
 const dialog = document.getElementById('add-new-dialog');
+const updateDialog = document.getElementById('update-dialog');
 const cancelBtn = document.getElementById('cancelBtn');
+const cancelBtn2 = document.getElementById('cancelBtn-2');
 const submitBtn = document.getElementById('submitBtn');
 const dialogContent = document.querySelector('.add-new-dialog-content');
 const categoryInput = document.getElementById('category');
 const usernameInput = document.getElementById('username');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
+const uCategoryInput = document.getElementById('u-category');
+const uUsernameInput = document.getElementById('u-username');
+const uEmailInput = document.getElementById('u-email');
+const uPasswordInput = document.getElementById('u-password');
 const errorMessageContainer = document.createElement('div'); // Create error message container
 // Add error message container at the end of dialogContent (once)
 dialogContent.appendChild(errorMessageContainer);
@@ -247,7 +317,7 @@ function hideErrorMessage() {
 
 // Show or hide dialog when plus icon is clicked
 plusIcon.addEventListener('click', () => {
-    dialog.style.display = dialog.style.display === "block" ? "none" : "block";
+    dialog.style.display = dialog.style.display === "flex" ? "none" : "flex";
     hideErrorMessage(); // Hide error message when dialog is toggled
 });
 
@@ -256,6 +326,12 @@ cancelBtn.addEventListener('click', () => {
     dialog.style.display = 'none';
     hideErrorMessage();
 });
+
+// Hide dialog
+cancelBtn2.addEventListener('click', () => {
+  updateDialog.style.display = 'none';
+});
+
 
 // Handle form submission when submit button is clicked
 submitBtn.addEventListener('click', () => {
@@ -308,31 +384,3 @@ categoryInput.addEventListener('focus', hideErrorMessage);
 usernameInput.addEventListener('focus', hideErrorMessage);
 emailInput.addEventListener('focus', hideErrorMessage);
 passwordInput.addEventListener('focus', hideErrorMessage);
-
-
-
-
-function OKClickOnAreYouSurePrompt() {
-  /*
-   * Performs the delete operation if OK is cliced on the Are you sure propmpt
-   */
-  AreYouSureDialog.style.display = "none";
-  // Delete the row from database
-  window.Android.deleteRowFromDb(currentIndex);
-  refreshSelectElement(true);
-
-  // Send a toast to Android about it
-  window.Android.toastMessageFromJS("Route deleted successfully");
-}
-
-const AreYouSureDialog = document.getElementById("are-you-sure-dialog");
-
-
-
-
-deleteButton.addEventListener('click', function() {
-  /*
-  * Reveals the "are you sure" dialog
-  */
-    AreYouSureDialog.style.display = "block";
-});

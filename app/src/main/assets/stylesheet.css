@@ -53,43 +53,64 @@ body h1 {
   height: 20px;
   cursor: pointer;
 }
+/**/
 
-.info-popup, .edit-popup {
-  display: none;
+ /* Basic styling for the dialog overlay */
+ .dialog-overlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 75%; /* Adjust width as needed */
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
-  max-height: 125%; /* Set maximum height as needed */
-  overflow-y: auto; /* Make the content scrollable if it exceeds the max height */
-  overflow-x: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
 }
 
-.info-popup p, .edit-popup p{
-  margin: 0 0 10px;
-  font-size: 14px;
-  line-height: 1.4;
+/* Styling for the dialog box */
+.dialog-box {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 300px;
+  max-width: 90%;
+  text-align: center;
 }
 
-.info-popup h2, .edit-popup h2 {
-  margin-top: 0;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.close-info-popup, .close-edit-popup {
+.close-popup {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #333;
   cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  transition: background-color 0.3s, transform 0.3s;
 }
+
+.close-popup:active {
+  color: #000000;
+  color: #fff;
+  transform: scale(0.95);
+}
+
+
+h2.border-below {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin: 0;
+}
+/**/
+
+
+
+/**/
 
 .button {
   display: inline-block;
@@ -98,7 +119,7 @@ body h1 {
   font-size: 12px;
   font-weight: bold;
   color: #000000;
-  background-color: #b1b1b1;
+  background-color: #dfdfdf;
   border: none;
   border-radius: 5px;
   text-align: center;
@@ -108,9 +129,11 @@ body h1 {
 
 
 .button:active {
-  background-color: #1f6f9f;
+  background-color: #474747;
+  color: #ccc;
   transform: scale(0.95);
 }
+
 .modify-container {
   display: flex;
   justify-content: center;
@@ -149,46 +172,191 @@ body h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
 }
 
-/* Dialog styles */
+/* Dialog Overlay */
 .add-new-dialog-class {
-  display: none; /* Hidden by default */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  z-index: 2000;
+  display: none; /* Hidden by default, will be shown via JavaScript */
+  position: fixed; 
+  z-index: 9999; /* On top of other elements */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
 }
 
+/* Dialog Content Box */
 .add-new-dialog-content {
-  display: flex;
-  flex-direction: column;
+  background-color: #fff; /* White background */
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative; /* For positioning the close button */
 }
-/* Default input styling */
-.add-new-dialog-class h3 {
+
+
+/* Border Below Header */
+.border-below {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* Form Labels */
+label {
+  display: block;
+  margin-bottom: 8px;
   font-weight: bold;
-  text-align: center;
 }
-/* Default input styling */
-.add-new-dialog-class input {
-  margin-bottom: 10px;
+
+/* Form Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
   padding: 8px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
-
-/* Styling when an input is focused (clicked) */
-.add-new-dialog-class input:focus {
-  border-color: #6086af; /* Blue border when focused */
-  outline: 2px solid #6086af; /* Blue outline */
-  box-shadow: none; /* Remove any additional shadows if you want a cleaner look */
+/* Change border color to blue on focus */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: blue; /* Blue border color on focus */
+  outline: none; /* Remove default outline */
 }
-
-.add-new-dialog-class button {
+/* Submit and Cancel Buttons */
+a.button {
+  display: inline-block;
+  padding: 10px 20px;
   margin-right: 10px;
-  padding: 8px 12px;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+/* Base dialog container */
+#are-you-sure-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it's on top of other elements */
+  visibility: hidden; /* Initially hidden */
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Visible state for dialog */
+#are-you-sure-dialog.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Dialog box container */
+.dialog-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeInDialog 0.3s ease;
+}
+
+/* Dialog header */
+.dialog-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.close-dialog-button:active {
+  color: #000000;
+  transform: scale(0.95);
+}
+
+
+/* Dialog content */
+.dialog-content {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Button container */
+.input-buttons-container-class {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Button styles */
+.dialog-ok-cancel-buttons {
+  padding: 8px 16px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.dialog-ok-cancel-buttons:hover {
+  background-color: #f0f0f0;
+}
+
+/* Cancel button */
+.dialog-ok-cancel-buttons:first-child {
+  background-color: #dfdfdf;
+  color: #555;
+}
+
+.dialog-ok-cancel-buttons:first-child:active {
+  background-color: #969696;
+}
+
+/* OK button */
+.dialog-ok-cancel-buttons:last-child {
+  background-color: #0071bd;
+  color: white;
+}
+
+.dialog-ok-cancel-buttons:last-child:active {
+  background-color: #01385a;
+}
+
+/* Animation */
+@keyframes fadeInDialog {
+  0% {
+      transform: scale(0.9);
+      opacity: 0;
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+
 

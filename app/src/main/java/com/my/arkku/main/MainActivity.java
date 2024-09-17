@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onPageFinished(WebView view, String url) {
                 jsInterface.createUIElements();
-                Log.d("debugtagi", "triggeräs");
-
             }
         });
     }
