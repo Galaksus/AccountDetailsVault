@@ -22,7 +22,7 @@ This is the view of searching a specific card.
 
 This is the view of adding new card.
 
-![image](https://github.com/user-attachments/assets/c0778505-bcba-46df-bb5f-adfa552b5b90)
+![Screenshot 2024-09-19 202426](https://github.com/user-attachments/assets/6268ec30-5158-4af6-bb42-ca74db2a377e)
 
 This is view is displayed after clicking the pencil icon of a card.
 
