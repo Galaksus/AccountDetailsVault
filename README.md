@@ -16,7 +16,7 @@ This is the view of adding new card.
 
 ![image](https://github.com/user-attachments/assets/60ed4557-2460-4dea-97b9-558e8f926ede)
 
-This is view after clicking the pencil icon of a card.
+This is view is displayed after clicking the pencil icon of a card.
 
 ![image](https://github.com/user-attachments/assets/7f2e059c-b43c-4883-a09b-c231a7fc374f)
 
