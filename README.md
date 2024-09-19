@@ -4,6 +4,7 @@ This software is meant to store your user credentials.
 
 - You can create categories and add accounts to a given category. For example you may have multiple email accounts.
 - You can add, update and delete cards to the app. The cards display user credentials for given account.
+- You can search a specific card by writing a string and after pressing 'ok' button it will jump to the card with the given string if it exists.
 - Passwords are hidden in the cards by default. By clicking the password you can view it.
 
 This is Android application that utilizes SQLite database to store credentials of each account you add. All data is stored locally on the mobile phone.
