@@ -12,10 +12,12 @@ As for now passwords are not encrypted in the database.
 
 
 This is the default view of the application. It shows all the cards you have created.
+
 ![image](https://github.com/user-attachments/assets/0ab07ea5-710a-4e04-9de5-c67d3ce9c1b4)
 
 
 This is the view of searching a specific card.
+
 ![image](https://github.com/user-attachments/assets/301944af-4781-422f-a340-537dfd117b90)
 
 This is the view of adding new card.
