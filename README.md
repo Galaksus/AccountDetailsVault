@@ -2,9 +2,9 @@ Have you had hard time memorizing all of your usernames, emails and passwords fo
 
 This software is meant to store your user credentials.
 
-You can create categories and add accounts to the given category. For example you may have multiple email accounts.
-
-You madd add, update and delete cards to the app that display the user credentials for given account.
+- You can create categories and add accounts to the given category. For example you may have multiple email accounts.
+- You madd add, update and delete cards to the app that display the user credentials for given account.
+- Passwords are hidden in the cards by default. By clicking the password you can view it.
 
 This is Android application that utilizes SQLite database to store credentials of each account you add. They are stored locally on the mobile phone.
 
