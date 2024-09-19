@@ -13,6 +13,18 @@ body h1 {
   text-align: center;
 }
 
+.header-container {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+  justify-content: center
+}
+
+#search-icon {
+  width: 24px; /* Adjust the size of the icon */
+  height: 24px;
+  cursor: pointer;
+  margin-left: 20px; /* Add space between the h1 and the icon */
+}
 
 .outer-credentials-pane {
   margin-left: 1%; /* Adjust as needed */

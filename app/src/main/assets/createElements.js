@@ -4,6 +4,7 @@ let _username;
 let _email; 
 let _password; 
 let _uOldCategoryName;
+
 // Function to create and append outer elements
 function createOuterElements(data) {
   console.log(data);
@@ -26,6 +27,22 @@ function createOuterElements(data) {
   document.body.appendChild(settingsPane);
 }
 
+function searchAndScrollTo(query) {
+  // Get all elements with the class 'outer-credentials-pane'
+  const elements = document.querySelectorAll('.outer-credentials-pane');
+  
+  // Loop through the elements to find a match
+  for (const element of elements) {
+    const heading = element.querySelector('h3');
+    
+    // Check if the heading contains the query string
+    if (heading && heading.textContent.includes(query)) {
+      // Scroll the matching element into view
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return; // Exit the function after finding the first match
+    }
+  }
+}
 
 function createInnerElements(data) {
   data = parseJsonData(data);
@@ -291,6 +308,11 @@ function copyTextToClipboard(element) {
 }
 
 // Get references to elements
+const searchIcon = document.getElementById('search-icon'); 
+const searchDialog= document.getElementById('search-dialog');
+const okBtn = document.getElementById('ok-btn');
+const searchInput = document.getElementById('search-card');
+
 const plusIcon = document.querySelector('.plus-icon'); 
 const dialog = document.getElementById('add-new-dialog');
 const updateDialog = document.getElementById('update-dialog');
@@ -314,6 +336,16 @@ dialogContent.appendChild(errorMessageContainer);
 function hideErrorMessage() {
     errorMessageContainer.innerHTML = '';  // Clear the error message
 }
+
+searchIcon.addEventListener('click', () => {
+  searchDialog.style.display = searchDialog.style.display === "flex" ? "none" : "flex";
+});
+
+okBtn.addEventListener('click', () => {
+  const search = searchInput.value;
+  searchAndScrollTo(search);
+  closeDialog(searchDialog);
+});
 
 // Show or hide dialog when plus icon is clicked
 plusIcon.addEventListener('click', () => {

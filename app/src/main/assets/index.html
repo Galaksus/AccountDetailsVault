@@ -9,7 +9,11 @@
 </head>
 
 <body>
-    <h1>Käyttäjätunnukset</h1>
+    <div class="header-container">
+        <h1>Käyttäjätunnukset</h1>
+        <img id="search-icon" src="icons/search-icon.svg" alt="Search" onclick="">
+    </div>
+
     <div id="Edit" class="dialog-overlay">
         <div class="dialog-box">
             <span class="close-popup" onclick="closeDialog(document.getElementById('Edit'))">&#10006;</span>
@@ -28,12 +32,25 @@
     </div>
     <div class="plus-icon">+</div>
 
+    <!-- Search Dialog -->
+    <div id="search-dialog" class="add-new-dialog-class">
+        <div class="add-new-dialog-content">
+            <span class="close-popup" style="color: #333;"
+            onclick="closeUpdateDialog(document.getElementById('search-dialog'))">&#10006;</span>
+            <h3 class="border-below">Search a card</h3>
+
+            <input type="text" id="search-card"><br>
+
+            <a id="ok-btn"  class="button">OK</a>
+        </div>
+    </div>
+
     <!-- Add new Dialog -->
     <div id="add-new-dialog" class="add-new-dialog-class">
         <div class="add-new-dialog-content">
             <span class="close-popup" style="color: #333;"
             onclick="closeDialog(document.getElementById('add-new-dialog'))">&#10006;</span>
-            <h3 class="border-below">Add new account</h3>
+            <h3 class="border-below">Add new card</h3>
 
             <label for="Category">Category:</label>
             <input type="text" id="category"><br>
