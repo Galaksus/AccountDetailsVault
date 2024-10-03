@@ -6,6 +6,7 @@
 body {
   user-select: none;
   background-color: #2e2e2e; /* Light gray background */
+  padding-bottom: 80px;
 }
 
 body h1 {
@@ -371,4 +372,24 @@ a.button {
 }
 
 
+.password-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;  /* Ensure the input takes up the full width of the container */
+}
 
+.password-container input {
+  width: 100%;  /* Ensure the input takes up the full width */
+  height: 40px; /* Match the height of other input fields */
+  padding-right: 30px;  /* Space for the icon without affecting the input size */
+}
+
+.password-icon {
+  position: absolute;
+  top: 37%;
+  right: 10px;
+  transform: translateY(-50%); /* Vertically center the icon */
+  cursor: pointer;
+  height: 20px; /* Match the height of the label or adjust as needed */
+  width: 20px;  /* Match the width of the icon as needed */
+}

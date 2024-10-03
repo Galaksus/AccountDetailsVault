@@ -307,6 +307,20 @@ function copyTextToClipboard(element) {
 
 }
 
+function togglePasswordVisibility(password_tag, togglePassword_tag) {
+  const passwordField = document.getElementById(password_tag);
+  const passwordIcon = document.getElementById(togglePassword_tag);
+  
+  if (passwordField.type === "password") {
+      passwordField.type = "text";  // Show password
+      passwordIcon.src = "icons/hide-password.svg";  // Change icon to "hide"
+  } else {
+      passwordField.type = "password";  // Hide password
+      passwordIcon.src = "icons/show-password.svg";  // Change icon to "show"
+  }
+}
+
+
 // Get references to elements
 const searchIcon = document.getElementById('search-icon'); 
 const searchDialog= document.getElementById('search-dialog');
@@ -339,6 +353,12 @@ function hideErrorMessage() {
 
 searchIcon.addEventListener('click', () => {
   searchDialog.style.display = searchDialog.style.display === "flex" ? "none" : "flex";
+
+  // If the dialog is displayed, clear the input and focus on it
+  if (searchDialog.style.display === "flex") {
+    searchInput.value = ''; // Clear the input field
+    searchInput.focus();     // Focus on the search input
+  }
 });
 
 okBtn.addEventListener('click', () => {

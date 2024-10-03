@@ -62,8 +62,10 @@
             <input type="text" id="username"><br>
 
             <label for="password">Password:</label>
-            <input type="password" id="password"><br>
-
+            <div class="password-container">
+                <input type="password" id="password"><br>
+                <img id="togglePassword" src="icons/show-password.svg" alt="Show Password" class="password-icon" onclick="togglePasswordVisibility('password', 'togglePassword')">
+            </div>
 
             <a id="submitBtn"  class="button">Submit</a>
             <a id="cancelBtn"  class="button">Cancel</a>
@@ -87,10 +89,14 @@
             <input type="text" id="u-username"><br>
 
             <label for="password">Password:</label>
-            <input type="password" id="u-password"><br>
+            <div class="password-container">
+                <input type="password" id="u-password"><br>
+                <img id="u-togglePassword" src="icons/show-password.svg" alt="Show Password" class="password-icon" onclick="togglePasswordVisibility('u-password', 'u-togglePassword')">
+            </div>
 
 
-            <a id="updateBtn"  class="button" onclick="UpdateClickedOnUpdatePrompt()">Update</a>
+
+            <a id="updateBtn"  class="button" onclick="UpdateClickedOnUpdatePrompt(this)">Update</a>
             <a id="cancelBtn-2"  class="button">Cancel</a>
         </div>
     </div>
