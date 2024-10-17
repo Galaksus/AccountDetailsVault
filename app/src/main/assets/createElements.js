@@ -313,10 +313,10 @@ function togglePasswordVisibility(password_tag, togglePassword_tag) {
   
   if (passwordField.type === "password") {
       passwordField.type = "text";  // Show password
-      passwordIcon.src = "icons/hide-password.svg";  // Change icon to "hide"
+      passwordIcon.src = "icons/show-password.svg";  // Change icon to "hide"
   } else {
       passwordField.type = "password";  // Hide password
-      passwordIcon.src = "icons/show-password.svg";  // Change icon to "show"
+      passwordIcon.src = "icons/hide-password.svg";  // Change icon to "show"
   }
 }
 
