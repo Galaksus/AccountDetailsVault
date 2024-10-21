@@ -14,23 +14,22 @@ As for now passwords are not encrypted in the database.
 
 This is the default view of the application. It shows all the cards you have created.
 
-![image](https://github.com/user-attachments/assets/0ab07ea5-710a-4e04-9de5-c67d3ce9c1b4)
+<img src="https://github.com/user-attachments/assets/dc58df99-a8a2-47b3-8b92-3809d6f43e38" alt="Default view" width="300"/>
 
+This is the view of searching for a specific card.
 
-This is the view of searching a specific card.
+<img src="https://github.com/user-attachments/assets/c5f631bf-8df0-4685-93be-b9f201d05fcc" alt="Searching a specific card" width="300"/>
 
-![image](https://github.com/user-attachments/assets/301944af-4781-422f-a340-537dfd117b90)
+This is the view of adding a new card. (Updating a card looks almost the same)
 
-This is the view of adding new card.
+<img src="https://github.com/user-attachments/assets/3e2f6663-613a-414d-aa2f-ce16627bc53f" alt="Adding new card" width="300"/>
 
-![Screenshot 2024-09-19 202426](https://github.com/user-attachments/assets/6268ec30-5158-4af6-bb42-ca74db2a377e)
+This view is displayed after clicking the pencil icon of a card.
 
-This is view is displayed after clicking the pencil icon of a card.
-
-![image](https://github.com/user-attachments/assets/c76c91e7-f012-4b50-9177-014947f6b9ee)
+<img src="https://github.com/user-attachments/assets/f4fe7a59-20f7-4e20-a376-c8dd1a0ff833" alt="Pencil icon view" width="300"/>
 
 This view comes if you try to delete a card.
 
-![image](https://github.com/user-attachments/assets/0b588cb9-5303-43fb-b9c6-f1c0c8a31062)
+<img src="https://github.com/user-attachments/assets/817c64a6-9c82-452e-85fd-9b94e127f171" alt="Delete card view" width="300"/>
 
 
