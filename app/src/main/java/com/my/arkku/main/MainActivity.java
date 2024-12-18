@@ -1,5 +1,6 @@
 package com.my.arkku.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.ConsoleMessage;
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Start the LockScreenActivity to handle biometric authentication at app startup
+        startLockScreenActivity();
+
         setContentView(R.layout.activity_main);
         mywebView=(WebView) findViewById(R.id.webview);
         mywebView.setWebViewClient(new WebViewClient());
@@ -53,5 +57,10 @@ public class MainActivity extends AppCompatActivity  {
                 jsInterface.createUIElements();
             }
         });
+    }
+    // Method to start LockScreenActivity
+    private void startLockScreenActivity() {
+        Intent intent = new Intent(MainActivity.this, LockScreenActivity.class);
+        startActivity(intent);
     }
 }
